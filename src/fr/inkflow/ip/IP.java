@@ -88,6 +88,7 @@ public class IP {
     }
 
     public IP getNetworkAdress() {
+        IP ipNet=new IP(0,0,0,0);
         if(this.getIPClass()=='A') {
             IP ipNet=new IP(this.oct1,0,0,0);
         }   else if(this.getIPClass()=='B') {
