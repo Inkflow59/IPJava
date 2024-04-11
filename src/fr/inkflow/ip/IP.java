@@ -1,5 +1,5 @@
 package fr.inkflow.ip;
-
+import java.util.Objects;
 import java.util.Scanner;
 
 public class IP {
@@ -56,5 +56,35 @@ public class IP {
     public String decimPointee() {
         String ipString=this.oct1+"."+this.oct2+"."+this.oct3+"."+this.oct4;
         return ipString;
+    }
+
+    public char getIPClass() {
+        if(this.oct1<=126) {
+            return 'A';
+        } else if(this.oct1>126 && this.oct1<=191) {
+            return 'B';
+        } else if(this.oct1>191 && this.oct1<=223) {
+            return 'C';
+        }   else {
+            return 'X';
+        }
+    }
+
+    public boolean IPEquals(IP autreAdresse) {
+        boolean equalFlag=false;
+        if(this.oct1==autreAdresse.getOct1() &&
+        this.oct2==autreAdresse.getOct2() &&
+        this.oct3==autreAdresse.getOct3() &&
+        this.oct4==autreAdresse.getOct4()) {
+            equalFlag=true;
+        }   else {
+            equalFlag=false;
+        }
+        return equalFlag;
+    }
+
+    public IP getNetworkAdress() {
+        IP networkIP = new IP(this.oct1, this.oct2,0,0);
+        return networkIP;
     }
 }
