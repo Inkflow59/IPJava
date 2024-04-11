@@ -61,10 +61,14 @@ public class IP {
     public char getIPClass() {
         if(this.oct1<=126) {
             return 'A';
-        } else if(this.oct1>126 && this.oct1<=191) {
+        }   else if(this.oct1>126 && this.oct1<=191) {
             return 'B';
-        } else if(this.oct1>191 && this.oct1<=223) {
+        }   else if(this.oct1>191 && this.oct1<=223) {
             return 'C';
+        }   else if(this.oct1>223 && this.oct1<=239) {
+            return 'D';
+        }   else if(this.oct1>239 && this.oct1<=255) {
+            return 'E';
         }   else {
             return 'X';
         }
@@ -84,7 +88,36 @@ public class IP {
     }
 
     public IP getNetworkAdress() {
-        IP networkIP = new IP(this.oct1, this.oct2,0,0);
-        return networkIP;
+        if(this.getIPClass()=='A') {
+            IP ipNet=new IP(this.oct1,0,0,0);
+        }   else if(this.getIPClass()=='B') {
+            IP ipNet=new IP(this.oct1,this.oct2,0,0);
+        }   else {
+            IP ipNet=new IP(this.oct1, this.oct2, this.oct3,0);
+        }
+    }
+
+    public boolean isSameNetwork(IP autreAdresse) {
+        if(this.getNetworkAdress()==autreAdresse.getNetworkAdress()) {
+            return true;
+        }   else {
+            return false;
+        }
+    }
+
+    private boolean verifIP() {
+        if(this.oct1<0 || this.oct1>255) {
+            return false ;
+        }   else if(this.oct2<0 || this.oct2>255) {
+            return false;
+        }   else if(this.oct2<0 || this.oct2>255) {
+            return false;
+        }   else if(this.oct3<0 || this.oct3>255) {
+            return false;
+        }   else if(this.oct4<0 || this.oct4>255) {
+            return false;
+        }   else {
+            return true;
+        }
     }
 }
